@@ -4,29 +4,24 @@ import * as config from '$lib/config'
 </script>
 
 <nav>
-    <a href="/" class="title">
-    <b>
-        {config.title}
-    </b>
-    </a>
 
-    <ul class="links">
+
+<ul class="links">
 <li>
-<a href="/about">about</a>
+<a href="/" class="title">Home</a>
+</li>
+<li>
+<a href="/about">About</a>
 </li>
 
 <li>
-    <a href="/blog">blog</a>
+    <a href="/blog">Blog</a>
     </li>
 
 <li>
-    <a href="/game">game</a>
+    <a href="/games">Games</a>
 </li>
-<li>
-    <a href="/rss.xml" target="_blank">RSS</a>
-</li>
-
-    </ul>
+ </ul>
 <button>Toggle</button>
 
 </nav>
@@ -37,7 +32,12 @@ padding-block: var(--size-7);
     }
     .links{
         margin-block: var(--size-7);
-    }
+        display: flex;
+    gap: 2rem;
+    margin-block: 0;
+    align-items: center;
+}
+    
 a{
 
     color: inherit;
@@ -51,7 +51,7 @@ justify-content: space-between;
 }
 .links{
     display: flex;
-    gap: var(--size-7);
+    gap: 2rem;
     margin-block: 0;
 }
 

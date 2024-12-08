@@ -4,7 +4,7 @@
     </script>
 
     <footer>
-<p><a href="https://x.com/jplwvp">{config.title}</a>&copy {new Date().getFullYear()} </p>
+<p>&copy<a href="https://x.com/jplwvp">{config.title}</a></p>
     </footer>
 
     <style>

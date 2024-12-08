@@ -1,1 +1,6 @@
-<h1>welcome to my website!</h1>
+<script>
+	let src = '/sheep.jpeg';
+	let name = 'sheep';
+</script>
+
+<img {src} alt="{name}" />
