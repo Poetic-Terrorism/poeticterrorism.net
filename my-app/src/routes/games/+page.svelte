@@ -74,7 +74,7 @@
 
         // Display rotation joke when Euler method pendulum starts rotating
         if (hasRotatedEuler && !rotationJokeDisplayed) {
-            rotationJoke = "Looks like this Euler pendulum just decided to break Newton's laws and become a helicopter! 🚁 Apparently, conservation of energy is more of a suggestion than a rule.";
+            rotationJoke = "a perpetual motion machine!";
             rotationJokeDisplayed = true;
         }
 
@@ -83,19 +83,6 @@
 
     function startAnimation() {
         if (isAnimating) return;
-
-        // Reset initial conditions
-        thetaEuler = Math.PI / 4;
-        omegaEuler = 0.0;
-        currentThetaEuler = thetaEuler;
-
-        thetaRK = Math.PI / 4;
-        omegaRK = 0.0;
-        currentThetaRK = thetaRK;
-
-        hasRotatedEuler = false;
-        rotationJokeDisplayed = false;
-        rotationJoke = '';
 
         isAnimating = true;
         animate();
@@ -107,15 +94,7 @@
             animationFrameId = null;
         }
         isAnimating = false;
-
-        // Reset initial conditions
-        thetaEuler = Math.PI / 4;
-        omegaEuler = 0.0;
-        currentThetaEuler = thetaEuler;
-
-        thetaRK = Math.PI / 4;
-        omegaRK = 0.0;
-        currentThetaRK = thetaRK;
+        // Do not reset the current positions, allowing pendulum to stop in place
     }
 
     // Calculate pendulum bob and rod position for Euler method
@@ -179,7 +158,7 @@
             x={width / 4} 
             y="50" 
             text-anchor="middle" 
-            font-size="16" 
+            font-size="22" 
             fill="var(--text-color)"
         >
             Euler Method
@@ -188,7 +167,7 @@
             x={3 * width / 4} 
             y="50" 
             text-anchor="middle" 
-            font-size="16" 
+            font-size="22" 
             fill="var(--text-color)"
         >
             Runge-Kutta Method
@@ -199,7 +178,7 @@
         <button 
             on:click={isAnimating ? stopAnimation : startAnimation}
         >
-            {isAnimating ? 'Stop' : 'Start'} Animation
+            {isAnimating ? 'Stop' : 'Start'}
         </button>
     </div>
 
@@ -216,9 +195,10 @@
         --pendulum-line-color: #000;
         --pendulum-bob-fill: #fff;
         --text-color: #000;
-        --button-bg: #f0f0f0;
-        --button-border: #333;
-        --button-hover-bg: #e0e0e0;
+        --button-bg: transparent;
+        --button-text: #000;
+        --button-border: #000;
+        --button-hover-bg: rgba(0,0,0,0.1);
         --joke-bg: #f0f0f0;
         --joke-text: #333;
     }
@@ -229,9 +209,10 @@
             --pendulum-line-color: #f0f0f0;
             --pendulum-bob-fill: rgba(240, 240, 240, 0.1);
             --text-color: #f0f0f0;
-            --button-bg: #333;
+            --button-bg: transparent;
+            --button-text: #f0f0f0;
             --button-border: #f0f0f0;
-            --button-hover-bg: #444;
+            --button-hover-bg: rgba(255,255,255,0.1);
             --joke-bg: #444;
             --joke-text: #f0f0f0;
         }
@@ -260,14 +241,18 @@
     }
 
     button {
-        padding: 0.5rem 1rem;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-size: 1rem;
+        font-weight: 500;
         background-color: var(--button-bg);
+        color: var(--button-text);
         border: 1px solid var(--button-border);
+        padding: 0.5rem 1rem;
         border-radius: 4px;
-        color: var(--text-color);
         cursor: pointer;
-        transition: background-color 0.3s;
-        touch-action: manipulation;
+        transition: background-color 0.2s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
     }
 
     button:hover {
