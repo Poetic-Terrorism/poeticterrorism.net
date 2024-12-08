@@ -24,6 +24,7 @@
     // Rotation detection
     let hasRotatedEuler = false;
     let rotationJokeDisplayed = false;
+    let rotationJoke = '';
 
     // SVG dimensions
     const width = 800;
@@ -70,6 +71,7 @@
         isAnimating = true;
         hasRotatedEuler = false;
         rotationJokeDisplayed = false;
+        rotationJoke = '';
         
         function animate() {
             simulateEuler();
@@ -77,7 +79,7 @@
 
             // Display rotation joke when Euler method pendulum starts rotating
             if (hasRotatedEuler && !rotationJokeDisplayed) {
-                alert("Looks like this Euler pendulum just decided to break Newton's laws and become a helicopter! 🚁\nApparently, conservation of energy is more of a suggestion than a rule.");
+                rotationJoke = "Looks like this Euler pendulum just decided to break Newton's laws and become a helicopter! 🚁 Apparently, conservation of energy is more of a suggestion than a rule.";
                 rotationJokeDisplayed = true;
             }
 
@@ -101,6 +103,17 @@
     // Calculate pendulum bob and rod position for Runge-Kutta method
     $: bobXRK = 3 * width / 4 + L * Math.sin(currentThetaRK);
     $: bobYRK = 200 + L * Math.cos(currentThetaRK);
+
+    // Touch event handlers
+    function handleStart(event: TouchEvent | MouseEvent) {
+        event.preventDefault();
+        startAnimation();
+    }
+
+    function handleStop(event: TouchEvent | MouseEvent) {
+        event.preventDefault();
+        stopAnimation();
+    }
 </script>
 
 <div class="pendulum-container">
@@ -167,10 +180,20 @@
     <div class="controls">
         <button 
             on:click={isAnimating ? stopAnimation : startAnimation}
+            on:touchstart|preventDefault={handleStart}
+            on:touchend|preventDefault={handleStop}
+            on:mousedown={handleStart}
+            on:mouseup={handleStop}
         >
             {isAnimating ? 'Stop' : 'Start'} Animation
         </button>
     </div>
+
+    {#if rotationJoke}
+        <div class="rotation-joke">
+            {rotationJoke}
+        </div>
+    {/if}
 </div>
 
 <style>
@@ -182,6 +205,8 @@
         --button-bg: #f0f0f0;
         --button-border: #333;
         --button-hover-bg: #e0e0e0;
+        --joke-bg: #f0f0f0;
+        --joke-text: #333;
     }
 
     /* Dark mode */
@@ -193,6 +218,8 @@
             --button-bg: #333;
             --button-border: #f0f0f0;
             --button-hover-bg: #444;
+            --joke-bg: #444;
+            --joke-text: #f0f0f0;
         }
     }
 
@@ -208,11 +235,14 @@
 
     svg {
         overflow: visible;
+        max-width: 100%;
+        height: auto;
     }
 
     .controls {
         display: flex;
         gap: 1rem;
+        margin-top: 1rem;
     }
 
     button {
@@ -223,9 +253,20 @@
         color: var(--text-color);
         cursor: pointer;
         transition: background-color 0.3s;
+        touch-action: manipulation;
     }
 
     button:hover {
         background-color: var(--button-hover-bg);
+    }
+
+    .rotation-joke {
+        margin-top: 1rem;
+        padding: 1rem;
+        background-color: var(--joke-bg);
+        color: var(--joke-text);
+        border-radius: 8px;
+        text-align: center;
+        max-width: 80%;
     }
 </style>
