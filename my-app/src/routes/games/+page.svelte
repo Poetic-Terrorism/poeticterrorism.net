@@ -79,7 +79,7 @@
 
             // Display rotation joke when Euler method pendulum starts rotating
             if (hasRotatedEuler && !rotationJokeDisplayed) {
-                rotationJoke = "Looks like this Euler pendulum just decided to break Newton's laws and become a helicopter! 🚁 Apparently, conservation of energy is more of a suggestion than a rule.";
+                rotationJoke = "a perpetual motion machine！";
                 rotationJokeDisplayed = true;
             }
 
@@ -185,7 +185,7 @@
             on:mousedown={handleStart}
             on:mouseup={handleStop}
         >
-            {isAnimating ? 'Stop' : 'Start'} Animation
+            {isAnimating ? 'Faster' : 'Start'} Animation
         </button>
     </div>
 
