@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { onMount } from 'svelte';
+    import { onMount, onDestroy } from 'svelte';
 
     // Pendulum parameters
     const g = 9.81;  // gravity (m/s^2)
@@ -18,8 +18,7 @@
 
     // Animation state
     let isAnimating = false;
-    let animationFrameEuler: number;
-    let animationFrameRK: number;
+    let animationFrameId: number | null = null;
 
     // Rotation detection
     let hasRotatedEuler = false;
@@ -67,33 +66,56 @@
         return currentThetaRK;
     }
 
+    function animate() {
+        if (!isAnimating) return;
+
+        simulateEuler();
+        simulateRK();
+
+        // Display rotation joke when Euler method pendulum starts rotating
+        if (hasRotatedEuler && !rotationJokeDisplayed) {
+            rotationJoke = "Looks like this Euler pendulum just decided to break Newton's laws and become a helicopter! 🚁 Apparently, conservation of energy is more of a suggestion than a rule.";
+            rotationJokeDisplayed = true;
+        }
+
+        animationFrameId = requestAnimationFrame(animate);
+    }
+
     function startAnimation() {
-        isAnimating = true;
+        if (isAnimating) return;
+
+        // Reset initial conditions
+        thetaEuler = Math.PI / 4;
+        omegaEuler = 0.0;
+        currentThetaEuler = thetaEuler;
+
+        thetaRK = Math.PI / 4;
+        omegaRK = 0.0;
+        currentThetaRK = thetaRK;
+
         hasRotatedEuler = false;
         rotationJokeDisplayed = false;
         rotationJoke = '';
-        
-        function animate() {
-            simulateEuler();
-            simulateRK();
 
-            // Display rotation joke when Euler method pendulum starts rotating
-            if (hasRotatedEuler && !rotationJokeDisplayed) {
-                rotationJoke = "a perpetual motion machine！";
-                rotationJokeDisplayed = true;
-            }
-
-            animationFrameEuler = requestAnimationFrame(animate);
-        }
-
+        isAnimating = true;
         animate();
     }
 
     function stopAnimation() {
-        if (animationFrameEuler) {
-            cancelAnimationFrame(animationFrameEuler);
+        if (animationFrameId) {
+            cancelAnimationFrame(animationFrameId);
+            animationFrameId = null;
         }
         isAnimating = false;
+
+        // Reset initial conditions
+        thetaEuler = Math.PI / 4;
+        omegaEuler = 0.0;
+        currentThetaEuler = thetaEuler;
+
+        thetaRK = Math.PI / 4;
+        omegaRK = 0.0;
+        currentThetaRK = thetaRK;
     }
 
     // Calculate pendulum bob and rod position for Euler method
@@ -104,16 +126,12 @@
     $: bobXRK = 3 * width / 4 + L * Math.sin(currentThetaRK);
     $: bobYRK = 200 + L * Math.cos(currentThetaRK);
 
-    // Touch event handlers
-    function handleStart(event: TouchEvent | MouseEvent) {
-        event.preventDefault();
-        startAnimation();
-    }
-
-    function handleStop(event: TouchEvent | MouseEvent) {
-        event.preventDefault();
-        stopAnimation();
-    }
+    // Cleanup function to stop animation when component is destroyed
+    onDestroy(() => {
+        if (animationFrameId) {
+            cancelAnimationFrame(animationFrameId);
+        }
+    });
 </script>
 
 <div class="pendulum-container">
@@ -180,12 +198,8 @@
     <div class="controls">
         <button 
             on:click={isAnimating ? stopAnimation : startAnimation}
-            on:touchstart|preventDefault={handleStart}
-            on:touchend|preventDefault={handleStop}
-            on:mousedown={handleStart}
-            on:mouseup={handleStop}
         >
-            {isAnimating ? 'Faster' : 'Start'} Animation
+            {isAnimating ? 'Stop' : 'Start'} Animation
         </button>
     </div>
 
