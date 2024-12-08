@@ -29,13 +29,12 @@
         /* Optional: add some styling to the link */
         color: inherit;
         text-decoration: none;
-        font-weight: bold;
     }
 
     /* Responsive considerations */
     @media (max-width: 768px) {
         footer {
-            padding-block: var(--size-5);
+            padding-block: var(--size-7);
         }
     }
 </style>
