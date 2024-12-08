@@ -16,7 +16,11 @@ import * as config from '$lib/config'
 </li>
 
 <li>
-    <a href="/contact">contact</a>
+    <a href="/blog">blog</a>
+    </li>
+
+<li>
+    <a href="/game">game</a>
 </li>
 <li>
     <a href="/rss.xml" target="_blank">RSS</a>
