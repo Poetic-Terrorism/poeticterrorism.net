@@ -14,21 +14,21 @@
         bio: "Whatever.",
         skills: [
             "Applied mathematics",
-            "Game development", 
-            "Web development",
+            "Game development (Godot)", 
+            "Web development (Svelte)",
         ],
         socialLinks: [
-            { 
-                platform: "GitHub", 
-                url: "https://github.com/Poetic-Terrorism",
-                iconLight: githubIconLight,
-                iconDark: githubIconDark
-            },
             { 
                 platform: "X", 
                 url: "https://x.com/jplwvp",
                 iconLight: xIconLight,
                 iconDark: xIconDark
+            },
+            { 
+                platform: "GitHub", 
+                url: "https://github.com/Poetic-Terrorism",
+                iconLight: githubIconLight,
+                iconDark: githubIconDark
             }
         ],
         interests: [
