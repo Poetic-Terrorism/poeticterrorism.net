@@ -114,6 +114,23 @@
 </div>
 
 <style>
+    :root {
+        --text-color: #000;
+        --button-bg: transparent;
+        --button-text: #000;
+        --button-border: #000;
+        --button-hover-bg: rgba(0,0,0,0.1);
+    }
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --text-color: #f0f0f0;
+            --button-bg: transparent;
+            --button-text: #f0f0f0;
+            --button-border: #f0f0f0;
+            --button-hover-bg: rgba(255,255,255,0.1);
+        }
+    }
+
 	.page-container {
 		display: flex;
 		flex-direction: column;
@@ -145,27 +162,22 @@
 	}
 
 	.generate-sheep-btn {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		padding: 12px 24px;
-		background-color: #4a4a4a;
-		color: white;
-		border: none;
-		border-radius: 30px;
-		cursor: pointer;
-		transition: all 0.3s ease;
-		gap: 10px;
-		font-weight: 600;
-		text-transform: uppercase;
-		letter-spacing: 1px;
-		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-size: 1rem;
+        font-weight: 500;
+        background-color: var(--button-bg);
+        color: var(--button-text);
+        border: 1px solid var(--button-border);
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
 	}
 
 	.generate-sheep-btn:hover {
-		background-color: #5a5a5a;
-		transform: translateY(-2px);
-		box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        background-color: var(--button-hover-bg);
 	}
 
 	.generate-sheep-btn svg {

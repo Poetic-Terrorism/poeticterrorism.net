@@ -5,23 +5,13 @@
     import githubIconLight from "/src/assets/svg/github-icon-light.svg";
     import githubIconDark from "/src/assets/svg/github-icon-dark.svg";
     import icon from "/src/assets/svg/white.svg";
-    
 
     let isDarkMode = false;
 
-    // Cramer-Rao inequality visualization data
-    const normalDistributionData = Array.from({length: 50}, (_, i) => {
-        const x = (i - 25) / 5;
-        return {
-            name: x.toFixed(1),
-            probability: Math.exp(-0.5 * x * x) / Math.sqrt(2 * Math.PI)
-        };
-    });
-
     const profile = {
         name: "文化",
-        title: "the moralist",
-        bio: "隣人愛",
+        title: "the moralist (2002-)",
+        bio: "Whatever.",
         skills: [
             "Applied mathematics",
             "Game development", 
@@ -45,31 +35,36 @@
             {
                 category: "Movies",
                 items: [
-                    "インターステラー",
+                    "Interstellar(2014)", 
+                    "The Wolf of Wall Street(2013)", 
+                    "Pulp Fiction(1994)",
+
                 ]
             },
             {
                 category: "Books",
                 items: [
-                    "ノルウェイの森",
+                    "Genocidal Organ(2007)",
+
                 ]
             },
             {
                 category: "Games",
                 items: [
-                    "The Beginner's Guide",
+                    "The Beginner's Guide(2015)"
+                   
                 ]
             },
             {
                 category: "Theories",
                 items: [
-                    "留数定理"
+                   "Theorema Egregium",
                 ]
             },
             {
-                category: "Inequality",
+                category: "Inequalities",
                 items: [
-                    "クラメル・ラオの不等式"
+                    "r > g"
                 ]
             },
 
@@ -144,28 +139,44 @@
                             <h3>{interest.category}</h3>
                             <ul>
                                 {#each interest.items as item}
-                                    <li>{@html item}</li>
+                                <li>{@html item}</li>
                                 {/each}
                             </ul>
                         </div>
                     {/each}
                 </section>
             </div>
-            <section class="theorem">
-                <h3>クラメル・ラオの不等式</h3>
-            </section>
-  
         </div>
     </div>
 </div>
 
 <style>
+    :root {
+        --background-primary: #ffffff;
+        --text-color: #000;
+        --background-soft: #f4f4f4;
+        --accent-color-light: #e0e4fc;
+        --text-secondary: #666;
+    }
+
+    /* Dark mode */
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --background-primary: #0F0F0F;
+            --text-color: #f0f0f0;
+            --background-soft: #1A1A1A;
+            --accent-color-light: #4d4d4d;
+            --text-secondary: #a7a7a7;
+
+        }
+    }
+
     /* Global Styling */
     .profile-container {
         max-width: 800px;
         margin: 0 auto;
         padding: 2rem;
-        background-color: var(--background-primary, #ffffff);
+        background-color: var(--background-primary);
         border-radius: 12px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         opacity: 0;
@@ -204,13 +215,13 @@
 
     .profile-name {
         font-size: 2.5rem;
-        color: var(--text-primary, #333);
+        color: var();
         margin-bottom: 0.5rem;
     }
 
     .profile-title {
         font-size: 1.2rem;
-        color: var(--text-secondary, #666);
+        color: var(--text-secondary);
         margin-bottom: 1rem;
     }
 
@@ -250,7 +261,7 @@
     }
 
     .skills li, .interests li {
-        background-color: var(--background-soft, #f4f4f4);
+        background-color: var(--background-soft);
         margin-bottom: 0.5rem;
         padding: 0.5rem;
         border-radius: 4px;
@@ -258,19 +269,7 @@
     }
 
     .skills li:hover, .interests li:hover {
-        background-color: var(--accent-color-light, #e0e4fc);
-    }
-
-    /* Theorem Section */
-    .theorem {
-        background-color: var(--background-soft, #f4f4f4);
-        padding: 1.5rem;
-        border-radius: 8px;
-    }
-
-    .chart-container {
-        width: 100%;
-        height: 300px;
+        background-color: var(--accent-color-light);
     }
 
     /* Responsive Design */
