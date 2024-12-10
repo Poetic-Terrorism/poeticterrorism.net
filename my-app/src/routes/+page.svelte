@@ -93,6 +93,15 @@
       },
     ]
   }}
+    twitter={{
+		creator: '@handle',
+		site: '@site',
+		cardType: 'summary_large_image',
+		title: 'Poetic Terrorism',
+		description: 'For all sheep.',
+		image: 'https://poeticterrorism.net//sheep.jpeg',
+		imageAlt: 'Twitter image alt'
+	  }}
 />
 
 <div class="page-container">
