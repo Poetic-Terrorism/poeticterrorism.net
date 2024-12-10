@@ -16,7 +16,7 @@
             "Applied mathematics",
             "Game development (Godot)", 
             "Web development (Svelte)",
-        ],
+            ],
         socialLinks: [
             { 
                 platform: "X", 
@@ -41,10 +41,18 @@
 
                 ]
             },
+            
             {
                 category: "Books",
                 items: [
-                    "Genocidal Organ(2007)",
+                    "Norwegian Wood(1987)",
+
+                ]
+            },
+            {
+                category: "Music",
+                items: [
+                    "Music(sakanaction,2013)",
 
                 ]
             },
@@ -119,10 +127,15 @@
 
         <div class="profile-content">
             <section class="bio">
-                <h3>About Me</h3>
-                <p>{profile.bio}</p>
+                <div class="bio-wrapper">
+                    <h3 class="bio-title">About Me</h3>
+                    <div class="bio-text-container">
+                        <div class="bio-quote-mark bio-quote-mark-start">"</div>
+                        <p class="bio-text">{profile.bio}</p>
+                        <div class="bio-quote-mark bio-quote-mark-end">"</div>
+                    </div>
+                </div>
             </section>
-
             <div class="profile-grid">
                 <section class="skills">
                     <h3>Skills</h3>
@@ -271,6 +284,62 @@
     .skills li:hover, .interests li:hover {
         background-color: var(--accent-color-light);
     }
+    .bio-wrapper {
+        background-color: var(--background-soft);
+        border-radius: 8px;
+        padding: 1.5rem;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .bio-title {
+        font-size: 1.2rem;
+        color: var(--text-secondary);
+        margin-bottom: 1rem;
+        position: relative;
+        display: inline-block;
+    }
+
+    .bio-title::after {
+        content: '';
+        position: absolute;
+        bottom: -0.5rem;
+        left: 0;
+        width: 50px;
+        height: 2px;
+        background-color: var(--text-secondary);
+    }
+
+    .bio-text-container {
+        position: relative;
+        padding: 1rem 2rem;
+    }
+
+    .bio-quote-mark {
+        color: var(--text-secondary);
+        opacity: 0.2;
+        font-size: 4rem;
+        position: absolute;
+        line-height: 1;
+    }
+
+    .bio-quote-mark-start {
+        top: -0.5rem;
+        left: 0;
+    }
+
+    .bio-quote-mark-end {
+        bottom: -1.5rem;
+        right: 0;
+        transform: rotate(180deg);
+    }
+
+    .bio-text {
+        position: relative;
+        z-index: 1;
+        font-style: italic;
+        color: var(--text-color);
+    }
 
     /* Responsive Design */
     @media (max-width: 768px) {
@@ -281,6 +350,13 @@
 
         .profile-grid {
             grid-template-columns: 1fr;
+        }
+        .bio-text-container {
+            padding: 1rem 0;
+        }
+
+        .bio-quote-mark {
+            font-size: 3rem;
         }
     }
 </style>
