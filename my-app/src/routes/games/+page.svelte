@@ -74,7 +74,7 @@
 
         // Display rotation joke when Euler method pendulum starts rotating
         if (hasRotatedEuler && !rotationJokeDisplayed) {
-            rotationJoke = "a perpetual motion machine!";
+            rotationJoke = "A clear counterexample to the simulation hypothesis";
             rotationJokeDisplayed = true;
         }
 
