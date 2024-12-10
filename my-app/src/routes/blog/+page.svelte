@@ -35,7 +35,7 @@
 			}
 
 			.title {
-				font-size: var(--font-size-fluid-3);
+				font-size: var(--font-size-5);
 				text-transform: capitalize;
                 color: var(--text-1);
 			}

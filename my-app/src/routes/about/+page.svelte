@@ -290,7 +290,7 @@
     margin-bottom: 0.3rem;
     position: relative; /* absolute から relative に戻す */
     display: inline-block;
-    margin-left: 0; /* 余分な余白を削除 */
+    margin-left: 0; 
 }
 
 .bio-wrapper {
@@ -319,8 +319,8 @@
 
 .bio-quote-mark {
     color: var(--text-secondary);
-    opacity: 0.2;
-    font-size: 3rem; /* Slightly reduced size */
+    opacity: 0.3;
+    font-size: 2rem; /* Slightly reduced size */
     position: absolute;
     line-height: 1;
 }
@@ -339,9 +339,8 @@
 .bio-text {
     position: relative;
     z-index: 1;
-    font-style: italic;
-    color: var(--text-color);
-    padding: 0.5rem; /* Reduced padding */
+    color: var(--text-primary);
+    padding: 0rem; /* Reduced padding */
     display: flex;
     justify-content: center;
     align-items: center;
