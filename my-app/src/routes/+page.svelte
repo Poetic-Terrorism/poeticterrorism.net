@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onDestroy } from 'svelte';
+	import { MetaTags } from 'svelte-meta-tags';
 
 	let src = '/sheep.jpeg';
 	let walkImages = ['/walk1.svg', '/walk2.svg', '/walk3.svg'];
@@ -76,6 +77,23 @@
 		});
 	});
 </script>
+
+<MetaTags
+  openGraph={{
+    type: 'website',
+    url: 'https://poeticterrorism.net/',
+    title: 'Poetic Terrorism',
+    description: 'For all sheep.',
+    images: [
+      {
+        url: 'https://poeticterrorism.net//sheep.jpeg',
+        width: 800,
+        height: 600,
+        alt: 'Og Image Alt'
+      },
+    ]
+  }}
+/>
 
 <div class="page-container">
 	<div class="image-container">
