@@ -2,7 +2,7 @@
     import * as config from '$lib/config'
     import { CornerDownRightIcon } from 'lucide-svelte'
     </script>
-    
+
     <nav>
     <ul class="links">
     <li>
@@ -11,11 +11,11 @@
     <li>
     <a href="/about">About</a>
     </li>
-    
+
     <li>
         <a href="/blog">Blog</a>
         </li>
-    
+
     <li>
         <a href="/games">Games</a>
     </li>
@@ -23,39 +23,36 @@
         <a href="/planets">Planets</a>
     </li>
      </ul>
-    
+
     </nav>
-    
+
     <style>
-       nav {
-    padding-block: var(--size-7);
-    display: flex;
-    justify-content: center;
-}
+        nav {
+            padding-block: var(--size-7);
+            display: flex;
+            justify-content: center; /* Center-align the navigation */
+        }
 
-.links {
-    display: flex;
-    gap: 2rem;
-    margin-block: 0;
-    align-items: center;
-    justify-content: center;
-    max-width: 600px; /* 希望する幅に調整できます */
-    width: 100%;      /* コンテナの幅に合わせます */
-    padding: 0 1rem;  /* 左右に少しスペースを追加 */
-}
+        .links {
+            display: flex;
+            gap: 2rem;
+            margin-block: 0;
+            align-items: center;
+            justify-content: center; /* Ensure links are centered */
+        }
 
-a {
-    color: inherit;
-    text-decoration: none;
-}
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
 
-@media (min-width: 768px) {
-    nav {
-        justify-content: center;
-    }
-    
-    .links {
-        justify-content: center;
-    }
-}
+        @media (min-width: 768px) {
+            nav {
+                justify-content: center; /* Maintain center alignment on larger screens */
+            }
+
+            .links {
+                justify-content: center; /* Ensure links remain centered */
+            }
+        }
     </style>

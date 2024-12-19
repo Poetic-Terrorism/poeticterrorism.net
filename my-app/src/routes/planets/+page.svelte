@@ -179,7 +179,7 @@
   }
 
   function handleResize() {
-    svgWidth = window.innerWidth * 0.8;
+    svgWidth = window.innerWidth * 0.5;
     svgHeight = window.innerHeight * 0.8;
     centerX = svgWidth / 2;
     centerY = svgHeight*0.625 / 2;
@@ -322,11 +322,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding: 0;  /* パディングを削除 */
+    padding: 2rem;
     width: 100%;
     height: 100vh;
-    overflow: hidden;  /* スクロールバーを防ぐ */
   }
 
   .controls {
@@ -336,8 +334,8 @@
     transform: translateX(-50%);
     display: flex;
     gap: 1rem;
-    z-index: 10;  /* コントロールを常に前面に */
   }
+
   .planet-trail {
     stroke: var(--trail-color);
     stroke-width: 1;
