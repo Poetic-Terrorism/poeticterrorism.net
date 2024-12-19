@@ -182,7 +182,7 @@
     svgWidth = window.innerWidth * 0.5;
     svgHeight = window.innerHeight * 0.8;
     centerX = svgWidth / 2;
-    centerY = svgHeight*0.625 / 2;
+    centerY = svgHeight*0.8 / 2;
     initializeTrails();
   }
 
