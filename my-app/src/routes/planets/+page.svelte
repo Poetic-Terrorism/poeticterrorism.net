@@ -29,7 +29,7 @@
   type Trail = Position[];
 
   let time = 0;
-  const scale = 50;
+  const scale = 40;
   
   let svgWidth = 3000;
   let svgHeight = 3000;
