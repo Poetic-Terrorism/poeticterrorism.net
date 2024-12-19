@@ -19,6 +19,9 @@
     <li>
         <a href="/games">Games</a>
     </li>
+    <li>
+        <a href="/planets">Planets</a>
+    </li>
      </ul>
     
     </nav>
