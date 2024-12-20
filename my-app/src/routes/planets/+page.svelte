@@ -14,9 +14,9 @@
     { name: '水星', semiMajorAxis: 0.387, period: 0.24, trailLength: 3000, radius: 4 },
     { name: '金星', semiMajorAxis: 0.723, period: 0.615, trailLength: 4000, radius: 4 },
     { name: '地球', semiMajorAxis: 1.0, period: 1.0, trailLength: 5000, radius: 6 },
-    { name: '火星', semiMajorAxis: 1.524, period: 1.88, trailLength: 6000, radius: 4 },
-    { name: '木星', semiMajorAxis: 5.203, period: 11.86, trailLength: 7000, radius: 4 },
-    { name: '土星', semiMajorAxis: 9.537, period: 29.46, trailLength: 8000, radius: 4 },
+    { name: '火星', semiMajorAxis: 1.524, period: 1.88, trailLength: 10000, radius: 4 },
+    { name: '木星', semiMajorAxis: 5.203, period: 11.86, trailLength: 30000, radius: 4 },
+    { name: '土星', semiMajorAxis: 9.537, period: 29.46, trailLength: 30000, radius: 4 },
     { name: '天王星', semiMajorAxis: 19.191, period: 84.01, trailLength: 90, radius: 4 },
     { name: '海王星', semiMajorAxis: 30.069, period: 164.79, trailLength: 100, radius: 4 },
   ];
