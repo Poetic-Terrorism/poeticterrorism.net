@@ -6,17 +6,19 @@
     semiMajorAxis: number;
     period: number;
     trailLength: number;
+    radius?: number;
   };
   
   const planets: Planet[] = [
-    { name: '水星', semiMajorAxis: 0.387, period: 0.24, trailLength: 3000 },
-    { name: '金星', semiMajorAxis: 0.723, period: 0.615, trailLength: 4000 },
-    { name: '地球', semiMajorAxis: 1.0, period: 1.0, trailLength: 5000 },
-    { name: '火星', semiMajorAxis: 1.524, period: 1.88, trailLength: 6000 },
-    { name: '木星', semiMajorAxis: 5.203, period: 11.86, trailLength: 7000 },
-    { name: '土星', semiMajorAxis: 9.537, period: 29.46, trailLength: 8000 },
-    { name: '天王星', semiMajorAxis: 19.191, period: 84.01, trailLength: 90 },
-    { name: '海王星', semiMajorAxis: 30.069, period: 164.79, trailLength: 100 },
+    { name: '太陽', semiMajorAxis: 1.0, period: 1.0, trailLength: 500, radius: 8 },
+    { name: '水星', semiMajorAxis: 0.387, period: 0.24, trailLength: 3000, radius: 4 },
+    { name: '金星', semiMajorAxis: 0.723, period: 0.615, trailLength: 4000, radius: 4 },
+    { name: '地球', semiMajorAxis: 1.0, period: 1.0, trailLength: 5000, radius: 6 },
+    { name: '火星', semiMajorAxis: 1.524, period: 1.88, trailLength: 6000, radius: 4 },
+    { name: '木星', semiMajorAxis: 5.203, period: 11.86, trailLength: 7000, radius: 4 },
+    { name: '土星', semiMajorAxis: 9.537, period: 29.46, trailLength: 8000, radius: 4 },
+    { name: '天王星', semiMajorAxis: 19.191, period: 84.01, trailLength: 90, radius: 4 },
+    { name: '海王星', semiMajorAxis: 30.069, period: 164.79, trailLength: 100, radius: 4 },
   ];
 
   const moon = {
@@ -42,7 +44,6 @@
   let isGeocentric = false;
   
   let planetTrails: { [key: string]: Trail } = {};
-  let sunTrail: Trail = [];
   let moonTrail: Trail = [];
 
   function stopAnimation() {
@@ -60,7 +61,6 @@
       acc[planet.name] = [];
       return acc;
     }, {} as { [key: string]: Trail });
-    sunTrail = [];
     moonTrail = [];
     time = 0;
     
@@ -106,17 +106,16 @@
       if (planet.name === '地球') {
         return { x: centerX, y: centerY };
       }
+      if (planet.name === '太陽') {
+        const angle = (2 * Math.PI * t) / planet.period;
+        return {
+          x: centerX + scale * Math.cos(angle),
+          y: centerY + scale * Math.sin(angle)
+        };
+      }
       return calculateGeocentricPosition(planet, t);
     }
     return calculateHeliocentricPosition(planet.semiMajorAxis, planet.period, t);
-  }
-
-  function calculateSunPosition(t: number) {
-    const angle = (2 * Math.PI * t) / 1.0;
-    return {
-      x: centerX + scale * Math.cos(angle),
-      y: centerY + scale * Math.sin(angle)
-    };
   }
 
   function updateTrails() {
@@ -131,14 +130,6 @@
       }
     });
 
-    if (isGeocentric) {
-      const sunPos = calculateSunPosition(time);
-      sunTrail.push(sunPos);
-      if (sunTrail.length > 500) {
-        sunTrail = sunTrail.slice(-500);
-      }
-    }
-
     const earthPos = calculatePosition(planets.find(p => p.name === '地球')!, time);
     const moonPos = calculateMoonPosition(earthPos, time);
     moonTrail.push(moonPos);
@@ -152,8 +143,8 @@
       lastFrameTime = currentTime;
     }
     
-    const deltaTime = (currentTime - lastFrameTime) / 1000; // Convert to seconds
-    time += deltaTime * 0.3; // Adjust speed factor as needed
+    const deltaTime = (currentTime - lastFrameTime) / 1000;
+    time += deltaTime * 0.3;
     
     lastFrameTime = currentTime;
     updateTrails();
@@ -182,7 +173,7 @@
     svgWidth = window.innerWidth * 0.5;
     svgHeight = window.innerHeight * 0.8;
     centerX = svgWidth / 2;
-    centerY = svgHeight*0.8 / 2;
+    centerY = svgHeight * 0.8 / 2;
     initializeTrails();
   }
 
@@ -205,7 +196,6 @@
   }
 </script>
 
-<!-- SVGとスタイルの部分は変更なし -->
 <div class="container">
   <svg width={svgWidth} height={svgHeight}>
     <rect width={svgWidth} height={svgHeight} fill="none"/>
@@ -219,14 +209,6 @@
         />
       {/if}
     {/each}
-
-    {#if isGeocentric}
-      <path 
-        d={createPathFromTrail(sunTrail)} 
-        class="planet-trail"
-        fill="none"
-      />
-    {/if}
 
     <path 
       d={createPathFromTrail(moonTrail)} 
@@ -251,13 +233,13 @@
     </text>
     
     {#each planets as planet}
-      {#if !(isGeocentric && planet.name === '地球')}
+      {#if !(isGeocentric && planet.name === '地球') && planet.name !== (isGeocentric ? undefined : '太陽')}
         {@const pos = calculatePosition(planet, time)}
         <circle
           cx={pos.x}
           cy={pos.y}
-          r={planet.name === '地球' ? 6 : 4}
-          class="planet"
+          r={planet.radius || 4}
+          class={planet.name === '太陽' ? 'sun' : 'planet'}
         />
 
         {#if planet.name === '地球'}
@@ -271,16 +253,6 @@
         {/if}
       {/if}
     {/each}
-
-    {#if isGeocentric}
-      {@const sunPos = calculateSunPosition(time)}
-      <circle
-        cx={sunPos.x}
-        cy={sunPos.y}
-        r="8"
-        class="sun"
-      />
-    {/if}
   </svg>
 
   <div class="controls">
@@ -294,7 +266,6 @@
 </div>
 
 <style>
-  /* Light mode (default) */
   :root {
     --planet-color: #000;
     --trail-color: #ddd;
@@ -305,7 +276,6 @@
     --button-hover-bg: rgba(0,0,0,0.1);
   }
 
-  /* Dark mode */
   @media (prefers-color-scheme: dark) {
     :root {
       --planet-color: #fff;
