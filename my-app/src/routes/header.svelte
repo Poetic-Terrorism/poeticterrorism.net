@@ -22,6 +22,9 @@
     <li>
         <a href="/planets">Planets</a>
     </li>
+    <li>
+        <a href="/Pendulams">Pendulams</a>
+    </li>
      </ul>
 
     </nav>
