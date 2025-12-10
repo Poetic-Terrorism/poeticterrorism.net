@@ -1,35 +1,41 @@
 <script lang="ts">
-    // 必要に応じてメタデータなどを設定
+    // 必要に応じて
 </script>
 
 <svelte:head>
-    <title>Simple Clicker | Poetic Terrorism</title>
+    <title>Simple Clicker</title>
 </svelte:head>
 
 <div class="game-container">
     <iframe 
-        src="/games/simple-clicker/index.html" 
-        title="Simple Clicker"
-        allow="autoplay; fullscreen; clipboard-write"
-    ></iframe>
+        title="Simple Clicker Game"
+        frameborder="0" 
+        src="https://itch.io/embed-upload/15796217?color=2f4344" 
+        allowfullscreen
+        allow="autoplay; fullscreen *; geolocation; microphone; camera; midi; monetization; xr-spatial-tracking; gamepad; gyroscope; accelerometer; xr; cross-origin-isolated"
+        width="1152" 
+        height="668"
+    >
+        <a href="https://poeticterrorism.itch.io/simple-clicker">Play simple clicker on itch.io</a>
+    </iframe>
 </div>
 
 <style>
+    
     .game-container {
-        width: 100%;
-        height: 80vh; /* 画面の高さに合わせて調整 */
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-top: 2rem;
+        width: 100%;
+        min-height: 100vh;
+        padding: 20px;
+        background-color: #000;
     }
 
     iframe {
-        width: 100%;
-        height: 100%;
-        border: none;
-        max-width: 1280px; /* ゲームの最大幅 */
-        background-color: #000; /* ロード中の背景色 */
-        border-radius: 8px;
+        max-width: 100%;
+        height: auto;
+        aspect-ratio: 1152 / 668;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     }
 </style>

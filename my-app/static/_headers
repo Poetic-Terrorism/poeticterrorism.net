@@ -1,4 +1,0 @@
-# simple-clickerのゲームファイルに対してのみ、特別な権限を与える設定
-/games/simple-clicker/*
-  Cross-Origin-Opener-Policy: same-origin
-  Cross-Origin-Embedder-Policy: require-corp
