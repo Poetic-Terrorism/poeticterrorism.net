@@ -11,6 +11,7 @@
             <li><a href="/games">Games</a></li>
             <li><a href="/planets">Planets</a></li>
             <li><a href="/Pendulams">Pendulams</a></li>
+            <li><a href="/games/simple-cliker">Clicker</a></li>
         </ul>
     </nav>
     
